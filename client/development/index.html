@@ -3,21 +3,22 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Express Angular Seed</title>
+	<title>{{branding}}</title>
 	<link rel="stylesheet" href="vendor/vendor.css">
 	<link rel="stylesheet" href="app.css">
 </head>
-<body ng-app="app">
+<body ng-app="app" ng-style="{'background-image': image}">
 <header>
-	<nav role="navigation" class="navbar navbar-inverse navbar-fixed-top">
+	<nav role="navigation" class="navbar navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a ui-sref="home" class="navbar-brand">Express Angular Seed</a>
+				<a ui-sref="home" class="navbar-brand">{{branding}}</a>
 			</div>
-			<div class="navbar-collapse">
+			<div class="pull-right">
 				<ul class="nav navbar-nav">
-					<li><a ui-sref="samples">Sample Page</a></li>
-					<li><a ui-sref="samples.child">Child Page</a></li>
+                    <li ng-repeat="tool in tools">
+                        <a ui-sref="tool.route" ng-include="tool.svg"></a>
+                    </li>
 				</ul>
 			</div>
 		</div>
