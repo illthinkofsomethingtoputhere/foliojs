@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html ng-app="app">
+<head ng-controller="head">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>{{branding}}</title>
 	<link rel="stylesheet" href="vendor/vendor.css">
 	<link rel="stylesheet" href="app.css">
 </head>
-<body ng-app="app" ng-style="{'background-image': image}">
-<header>
+<body ng-style="{'background-image': image}">
+<header ng-controller="navigation">
 	<nav role="navigation" class="navbar navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
