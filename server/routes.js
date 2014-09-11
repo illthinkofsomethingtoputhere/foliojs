@@ -6,6 +6,7 @@ module.exports  = function(app) {
 	The samples
 	 */
 	require('./routes/samples')(app);
+	require('./routes/github')(app);
 
 	/*
 	Catch the rest
