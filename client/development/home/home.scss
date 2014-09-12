@@ -1,3 +1,61 @@
 nav {
   background-color: transparent;
+
+  svg {
+    height: 24px;
+    width: 24px;
+  }
+}
+
+.page-nav {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+
+  ul {
+    text-align: center;
+
+    a {
+      display: block;
+      cursor: pointer;
+      position: relative;
+
+      &:hover {
+        .page-title {
+          opacity: 1;
+          top: -30px;
+        }
+      }
+      span {
+        display: block;
+
+        &.page-title {
+          opacity: 0;
+          position: absolute;
+          top: 30px;
+          width: 100%;
+          z-index: -1;
+          -webkit-transition: 0.25s;
+          -moz-transition: 0.25s;
+          -ms-transition: 0.25s;
+          -o-transition: 0.25s;
+          transition: 0.25s;
+        }
+        &.img-circle {
+          border: 2px solid #000;
+          background-color: #fff;
+          padding: 15px;
+
+          svg {
+            height: 100px;
+            width: 100px;
+          }
+        }
+      }
+    }
+  }
 }

@@ -1,13 +1,10 @@
-<div class="jumbotron">
-	<div class="container">
-		<h1>Pages:</h1>
-        <ul>
-            <li ng-repeat="page in pages">
-                <a ui-sref="page.route">
-                    <span ng-include="page.svg"></span>
-                    <span>{{page.title}}</span>
-                </a>
-            </li>
-        </ul>
-	</div>
+<div ng-controller="home" class="page-nav">
+    <ul class="list-inline">
+        <li ng-repeat="page in pages">
+            <a ui-sref="page.route">
+                <span class="page-title">{{page.title}}</span>
+                <span class="img-circle" ng-include="page.img"></span>
+            </a>
+        </li>
+    </ul>
 </div>
