@@ -114,7 +114,7 @@ gulp.task('templates', function() {
 			quotes: true
 		}))
 		.pipe(html2js({
-			moduleName: "templates"
+			moduleName: "folio.templates"
 		}))
 		.pipe(concat("templates.js"))
 		.pipe(uglify())

@@ -1,1 +1,6 @@
-angular.module('app', ['ui.router', 'ngAnimate', 'templates']);
+angular.module('app', [
+	'ui.router',
+	'ngAnimate',
+	'folio.templates',
+	'folio.pages.github'
+]);
