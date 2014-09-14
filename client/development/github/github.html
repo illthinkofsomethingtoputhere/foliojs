@@ -1,0 +1,8 @@
+<ul>
+	<li ng-repeat="repository in repositories">
+		<a ui-sref="github.repository({repository: repository.name})"><h2>{{repository.name}}</h2></a>
+		<span>{{repository.updated_at}}</span>
+		<p>{{repository.description}}</p>
+	</li>
+</ul>
+<div ui-view></div>

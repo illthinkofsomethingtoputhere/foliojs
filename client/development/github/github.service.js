@@ -8,7 +8,7 @@ angular.module('folio.pages.github')
 
 			this.get = function(repoName) {
 				if (!repoName) return getAll();
-				var deferred  = $q.deref();
+				var deferred = $q.defer();
 
 				if (repos.length) {
 					deferred.resolve(getOne(repoName));
@@ -25,24 +25,23 @@ angular.module('folio.pages.github')
 			function getOne(repoName) {
 				repos.forEach(function(repo) {
 					if (repo.name === repoName) {
-						return repoName;
+						return repo;
 					}
 				});
 			}
 
 			function getAll() {
-				var deferred  = $q.deref();
+				var deferred = $q.defer();
 
 				if (repos.length) {
 					deferred.resolve(repos);
 				} else {
-					$http.get('api/1/github/', function(data) {
-						if (data.length) {
+					$http.get('api/1/github/')
+						.success(function(data) {
 							cached = true;
 							repos = data;
 							deferred.resolve(repos);
-						}
-					});
+						});
 				}
 
 				return deferred.promise;
