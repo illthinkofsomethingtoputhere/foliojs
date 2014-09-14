@@ -1,0 +1,1 @@
+angular.module('folio.pages.github', []);
