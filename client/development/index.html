@@ -3,13 +3,13 @@
 <head ng-controller="head">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>{{branding}}</title>
+	<title ng-bind="branding"></title>
 	<link rel="stylesheet" href="vendor/vendor.css">
 	<link rel="stylesheet" href="app.css">
 </head>
 <body ng-style="{'background-image': logo}">
-<header ng-controller="navigation">
-	<nav role="navigation" class="navbar navbar-fixed-top">
+<header>
+	<nav role="navigation" ng-controller="navigation" class="navbar navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a ui-sref="home" class="navbar-brand">{{branding}}</a>
@@ -24,7 +24,19 @@
 		</div>
 	</nav>
 </header>
-<div class="main-view slide" ui-view></div>
+<div class="main-view slide">
+	<nav role="navigation" ng-controller="pages" class="page-nav">
+		<ul class="list-inline">
+			<li ng-repeat="page in pages">
+				<a ui-sref="{{page.route}}">
+					<span class="page-title">{{page.title}}</span>
+					<span class="img-circle" ng-include="page.img"></span>
+				</a>
+			</li>
+		</ul>
+	</nav>
+	<div ui-view></div>
+</div>
 <script src="vendor/vendor.js"></script>
 <script src="templates.js"></script>
 <script src="app.js"></script>

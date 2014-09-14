@@ -8,7 +8,7 @@ angular.module('app')
 		$scope.branding = config.branding();
 		$scope.tools = config.tools();
 	}])
-    .controller('home', ['$scope', 'config', function($scope, config) {
+    .controller('pages', ['$scope', 'config', function($scope, config) {
 
         $scope.pages = config.pages();
     }]);
