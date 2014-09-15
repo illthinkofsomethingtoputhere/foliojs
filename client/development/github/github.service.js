@@ -1,48 +1,57 @@
+/**
+ * Github Service
+ * ===
+ * An $http wrapper to retrieve github repositories and readmes. Caching enabled.
+ *
+ * repository(repositoryName)
+ * repositories()
+ * readme(repositoryName)
+ */
 angular.module('folio.pages.github')
 	.service('github', [
 		'$http',
 		'$q',
 		function($http, $q) {
 
-			var repos = [];
-
-			this.get = function(repoName) {
-				if (!repoName) return getAll();
+			this.repository = function(repositoryName) {
+				if (!repositoryName) throw new Error('Repository not specified.');
 				var deferred = $q.defer();
 
-				if (repos.length) {
-					deferred.resolve(getOne(repoName));
-				} else {
-					getAll()
-						.then(function() {
-							deferred.resolve(getOne(repoName));
-						});
-				}
+				getAll()
+					.then(function(repositories) {
+						for (var i = 0, length = repositories.length; i < length; i++) {
+							if (repositories[i].name === repositoryName) {
+								deferred.resolve(repositories[i]);
+							}
+						}
+					});
 
 				return deferred.promise;
 			};
 
-			function getOne(repoName) {
-				repos.forEach(function(repo) {
-					if (repo.name === repoName) {
-						return repo;
-					}
-				});
-			}
+			this.repositories = function() {
+				return getAll();
+			};
+
+			this.readme = function(repositoryName) {
+				if (!repositoryName) throw new Error('Repository not specified.');
+				var deferred = $q.defer();
+
+				$http.get('api/1/github/readme/' + repositoryName, {cache: true})
+					.success(function(readme) {
+						deferred.resolve(readme);
+					});
+
+				return deferred.promise;
+			};
 
 			function getAll() {
 				var deferred = $q.defer();
 
-				if (repos.length) {
-					deferred.resolve(repos);
-				} else {
-					$http.get('api/1/github/')
-						.success(function(data) {
-							cached = true;
-							repos = data;
-							deferred.resolve(repos);
-						});
-				}
+				$http.get('api/1/github/repositories', {cache: true})
+					.success(function(repositories) {
+						deferred.resolve(repositories);
+					});
 
 				return deferred.promise;
 			}

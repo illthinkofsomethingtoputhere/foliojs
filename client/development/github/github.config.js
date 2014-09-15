@@ -7,9 +7,9 @@ angular.module('folio.pages.github')
 				url: '/github',
 				templateUrl: 'github/github.html',
 				resolve: {
-					repositories: function(github) {
-						return github.get();
-					}
+					repositories: ['github', function(github) {
+						return github.repositories();
+					}]
 				},
 				controller: 'github'
 			});
@@ -18,9 +18,12 @@ angular.module('folio.pages.github')
 				url: '/:repository',
 				templateUrl: 'github/repository/repository.html',
 				resolve: {
-					repository: function($stateParams, github) {
-						return github.get($stateParams.repository);
-					}
+					repository: ['$stateParams', 'github', function($stateParams, github) {
+						return github.repository($stateParams.repository);
+					}],
+					readme: ['$stateParams', 'github', function($stateParams, github) {
+						return github.readme($stateParams.repository);
+					}]
 				},
 				controller: 'repository'
 			});
