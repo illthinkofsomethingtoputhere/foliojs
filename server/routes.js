@@ -7,6 +7,7 @@ module.exports  = function(app) {
 	 */
 	require('./routes/samples')(app);
 	require('./routes/github')(app);
+	require('./routes/tumblr')(app);
 
 	/*
 	Catch the rest
